@@ -1,4 +1,4 @@
-export const address = "0xfd8F19C6A9356cCAf37370BF1EaF4DA0c7a6b7E4";
+export const address = "0xc0dB08d9F200C54dB5706F5AA03AEfa5AB4e9258";
 export const abi =[
 	{
 		"inputs": [
@@ -313,11 +313,6 @@ export const abi =[
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -342,6 +337,11 @@ export const abi =[
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"inputs": [
@@ -506,6 +506,65 @@ export const abi =[
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "vest",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "status",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "startPeriod",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "cliff",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "duration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenReleaseCycles",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "allTokensClaimed",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalTokens",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalTokenClaimed",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "revokationStatus",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
