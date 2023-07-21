@@ -68,6 +68,7 @@ contract token is ERC20, Ownable, ReentrancyGuard{
         require(_preSaleInfo.status, "Pre-sale is not active");
         require(block.timestamp <= _preSaleInfo.endingTime, "Pre-sale has ended");
         require(preSaleStatus[msg.sender] == false,"alreay in presale, claim all tokens to exit");
+        require(msg.value >= amount,"insufficient amount of coins");
 
         uint256 tokensToMint = amount * _preSaleInfo.saleTokenPrice;
         preSaleStatus[msg.sender] = true;
@@ -102,11 +103,11 @@ contract token is ERC20, Ownable, ReentrancyGuard{
         bool revokationStatus;
     }
 
-    mapping (address => vesting) vest;
+    mapping (address => vesting) public vest;
 
     function createVesting(address _addr,uint _amount) internal uintIsGraterThenZero(_amount) notZeroAddress(_addr){
         require(vest[_addr].status == false,"vesting is alreay created");
-        vesting memory _vesting = vesting({status: true, startPeriod: block.timestamp, cliff: block.timestamp + 1 minutes,duration: 3 minutes, tokenReleaseCycles: 3, allTokensClaimed: false, totalTokens: _amount, totalTokenClaimed: 0,revokationStatus: false});
+        vesting memory _vesting = vesting({status: true, startPeriod: block.timestamp, cliff: block.timestamp + 10 seconds,duration: 30 seconds, tokenReleaseCycles: 3, allTokensClaimed: false, totalTokens: _amount, totalTokenClaimed: 0,revokationStatus: false});
         vest[_addr] = _vesting;
         if( _amount >100){
             _WhiteList(_addr); //automatic whitlisting, refer function WhtieList
@@ -120,14 +121,23 @@ contract token is ERC20, Ownable, ReentrancyGuard{
         require(_vestation.revokationStatus == false,"vestation has been revoked");
         require(_vestation.allTokensClaimed == false, "all token has been claimed");
 
-        uint durationPerCycle = _vestation.duration/_vestation.tokenReleaseCycles;
-        uint tokensReleasedPerCycle = _vestation.totalTokens/_vestation.tokenReleaseCycles;
-        uint totalCyclesClosed = (_vestation.startPeriod + _vestation.cliff - block.timestamp)/durationPerCycle;
-        uint totalTokensReleased = tokensReleasedPerCycle*totalCyclesClosed;
-        uint tokensClaimedNow = totalTokensReleased - _vestation.totalTokenClaimed;
-        _mint(msg.sender, tokensClaimedNow);
+        uint tokensReleasedPerCycle = _vestation.totalTokens/_vestation.tokenReleaseCycles; 
+        uint durationPerCycle = (_vestation.duration )/_vestation.tokenReleaseCycles; 
+        uint totalCyclesClosed = (block.timestamp -_vestation.startPeriod )/durationPerCycle;
+        uint totalTokensReleased;
+        if(totalCyclesClosed <= _vestation.tokenReleaseCycles){
+            uint totalTokensReleased = tokensReleasedPerCycle*totalCyclesClosed;
+            uint tokensClaimedNow = totalTokensReleased - _vestation.totalTokenClaimed;
+            _mint(msg.sender, tokensClaimedNow);
+            _vestation.totalTokenClaimed = totalTokensReleased;
+        }
+        else{
+            uint totalTokensReleased = _vestation.tokenReleaseCycles*tokensReleasedPerCycle;
+            uint tokensClaimedNow = totalTokensReleased - _vestation.totalTokenClaimed;
+            _mint(msg.sender, tokensClaimedNow);
+            _vestation.totalTokenClaimed = totalTokensReleased;
+        }
         
-        _vestation.totalTokenClaimed = totalTokensReleased;
         if( totalTokensReleased >= _vestation.totalTokens){
             _vestation.allTokensClaimed = true;
             preSaleStatus[msg.sender] = false;// now you can participate again in the sale
