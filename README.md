@@ -1,5 +1,7 @@
-website link: https://di-dapp-qkard.vercel.app/
-USE CONSOLE, SEPOLAI NETWORK
-CONTRACTv0.1.5(visibity switched to public for all)
+## Content
 
-website deployement is done by cloning this on a public repository
+- Website link: https://vesting-token.vercel.app/
+- Explaination video: https://drive.google.com/file/d/1HUV3I7Hfvic9ldBgbhXSkhVbRzeaiI3L/view?usp=sharing
+- Github Link: https://github.com/nikhilKumar131/vestingToken/
+- SMART CONTRACT LINK: https://github.com/nikhilKumar131/vestingToken/blob/main/contract/contract.sol
+- Mind map: https://miro.com/app/board/uXjVM0Kl3YM=/?share_link_id=104590171088
