@@ -202,7 +202,9 @@ export async function getProviderOrSigner(signer = false, web3modalRef) {
 
 
       const contract = new ethers.Contract(address, abi, signer);
-      const txn = await contract.purchaseTokensDuringPreSale(_amount);
+
+      const weiAmount = ethers.utils.parseUnits(_amount, "wei");
+      const txn = await contract.purchaseTokensDuringPreSale(_amount, {value: _amount});
       const reciept = await txn.wait();
       console.log(txn);
       console.log(reciept);
