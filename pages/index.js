@@ -77,8 +77,8 @@ export default function Home() {
                     </div>
                     <div className="mt-4">
                         <p className="font-semibold">Vesting:</p>
-                        <p>During Pre-Sale, your purchased tokens will be vested, and you can start claiming them after the cliff period ends. At the end of the vesting duration, you can claim all your tokens.</p>
-                        <p>For this testing token, the vesting period is set to just 3 minutes, and tokens can be claimed every 1 minute cycle.</p>
+                        <p>During Pre-Sale, your purchased tokens will be vested, and you can start claiming them after the cliff period of 10 seconds ends. At the end of the vesting duration, you can claim all your tokens.</p>
+                        <p>For this testing token, the vesting period is set to just 30 seconds, and tokens can be claimed every 10 secnods cycle.</p>
                     </div>
                 </div>
                 <p className="font-semibold">FUNCTIONS:</p>
@@ -87,7 +87,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     <a className="block bg-white border border-gray-300 rounded-lg shadow p-4 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out">
                         <h2 className="text-xl font-bold mb-2">Buy(In Sale)</h2>
-                        <p className="text-gray-600">Buy your pre-sale Token here, completely vested after 3 minutes, with three cycles each of 1 minute</p>
+                        <p className="text-gray-600">Buy your pre-sale Token here, completely vested after 30 seconds, with three cycles each of 10 seconds</p>
 
                         {/* Input fields */}
                         <input
