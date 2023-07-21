@@ -49,11 +49,11 @@ contract token is ERC20, Ownable, ReentrancyGuard{
 
     PreSaleInfo public preSaleInfo;
 
-    function startPreSale(uint256 _endingTime, uint256 _saleTokenPrice) external onlyOwner uintIsGraterThenZero(_saleTokenPrice){
+    function startPreSale(uint256 _durationInSec, uint256 _saleTokenPrice) external onlyOwner uintIsGraterThenZero(_saleTokenPrice){
         require(preSaleInfo.status == false,"sale is already active");
-        require(_endingTime > block.timestamp,"invalid ending time");
+        require(_durationInSec > 0,"invalid ending time");
         require(_saleTokenPrice <= tokenPrice,"sale price should be smaller");
-        preSaleInfo = PreSaleInfo({status: true,startingTime: block.timestamp, endingTime: _endingTime, saleTokenPrice: _saleTokenPrice});
+        preSaleInfo = PreSaleInfo({status: true,startingTime: block.timestamp, endingTime: block.timestamp + _durationInSec, saleTokenPrice: _saleTokenPrice});
     }
 
     function endPreSale() external onlyOwner{
@@ -62,6 +62,7 @@ contract token is ERC20, Ownable, ReentrancyGuard{
     }
 
     //you can buy only once becuase of vesting, you can particpate again when you have claimed all tokens in the end
+    //enter the amout of wei,
     function purchaseTokensDuringPreSale(uint256 amount) external payable uintIsGraterThenZero(amount) nonReentrant{
         PreSaleInfo memory _preSaleInfo = preSaleInfo;
         require(_preSaleInfo.status, "Pre-sale is not active");
