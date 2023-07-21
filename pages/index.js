@@ -65,7 +65,7 @@ export default function Home() {
                         <a className="text-blue-600 underline" href="https://github.com/nikhilKumar131/vestingToken/blob/main/contract/contract.sol" target="_blank" rel="noopener noreferrer">Link to the Smart Contract</a>
                     </div>
                     <div className="mt-2">
-                        <a className="text-blue-600 underline" href="https://drive.google.com/file/d/1HUV3I7Hfvic9ldBgbhXSkhVbRzeaiI3L/view?usp=sharing target="_blank" rel="noopener noreferrer">Link to the Explanation Video</a>
+                        <a className="text-blue-600 underline" href="https://drive.google.com/file/d/1HUV3I7Hfvic9ldBgbhXSkhVbRzeaiI3L/view?usp=sharing" target="_blank" rel="noopener noreferrer">Link to the Explanation Video</a>
                     </div>
                     <div className="mt-8">
                         <p className="font-semibold">Pre-Sale with Vesting and Whitelisting</p>
